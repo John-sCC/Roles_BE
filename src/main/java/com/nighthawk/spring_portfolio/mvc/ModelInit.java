@@ -62,11 +62,11 @@ public class ModelInit {
                     String text = "Test " + person.getEmail();
                     Note n = new Note(text, person);  // constructor uses new person as Many-to-One association
                     noteRepo.save(n);  // JPA Save
-
                     personService.addRoleToPerson(person.getEmail(), "ROLE_STUDENT");
                 }
             }
-
+            // for lesson demonstration: giving admin role to Mortensen
+            personService.addRoleToPerson(personArray[4].getEmail(), "ROLE_ADMIN");
         };
     }
 }
