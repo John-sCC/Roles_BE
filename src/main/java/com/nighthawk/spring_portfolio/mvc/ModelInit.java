@@ -38,10 +38,17 @@ public class ModelInit {
             }
 
             // adding roles
-            // PersonRole[] personRoles = PersonRole.init();
-            // for (PersonRole role : personRoles) {
-            //     personService.saveRole(role);
-            // }
+            PersonRole[] personRoles = PersonRole.init();
+            for (PersonRole role : personRoles) {
+                PersonRole existingRole = roleRepo.findByName(role.getName());
+                if (existingRole != null) {
+                    // role already exists
+                    continue;
+                } else {
+                    // role doesn't exist
+                    roleRepo.save(role);
+                }
+            }
 
             // Person database is populated with test data
             Person[] personArray = Person.init();
@@ -55,11 +62,10 @@ public class ModelInit {
                     String text = "Test " + person.getEmail();
                     Note n = new Note(text, person);  // constructor uses new person as Many-to-One association
                     noteRepo.save(n);  // JPA Save
+
+                    personService.addRoleToPerson(person.getEmail(), "ROLE_STUDENT");
                 }
             }
-            // test role
-            PersonRole newRole = new PersonRole("ROLE_STUDENT");
-            roleRepo.save(newRole);
 
         };
     }
