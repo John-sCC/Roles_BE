@@ -24,6 +24,7 @@ import jakarta.validation.constraints.Size;
 
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.vladmihalcea.hibernate.type.json.JsonType;
@@ -46,6 +47,9 @@ The last annotation connect to database
 @Entity
 @Convert(attributeName ="person", converter = JsonType.class)
 public class Person {
+    // for role manipulation
+    // @Autowired
+    // private PersonRoleJpaRepository personRoleJpaRepository;
 
     // automatic unique identifier for Person record
     @Id
@@ -103,9 +107,15 @@ public class Person {
         return -1;
     }
 
+    // a method to add roles
+    public void addRole(PersonRole newRole) {
+        if (newRole != null) {
+            this.roles.add(newRole);
+        }
+    }
+
     // Initialize static test data 
     public static Person[] init() {
-
         // basics of class construction
         Person p1 = new Person();
         p1.setName("Thomas Edison");
