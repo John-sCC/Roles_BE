@@ -47,10 +47,6 @@ The last annotation connect to database
 @Entity
 @Convert(attributeName ="person", converter = JsonType.class)
 public class Person {
-    // for role manipulation
-    // @Autowired
-    // private PersonRoleJpaRepository personRoleJpaRepository;
-
     // automatic unique identifier for Person record
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -105,13 +101,6 @@ public class Person {
             LocalDate birthDay = this.dob.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             return Period.between(birthDay, LocalDate.now()).getYears(); }
         return -1;
-    }
-
-    // a method to add roles
-    public void addRole(PersonRole newRole) {
-        if (newRole != null) {
-            this.roles.add(newRole);
-        }
     }
 
     // Initialize static test data 
