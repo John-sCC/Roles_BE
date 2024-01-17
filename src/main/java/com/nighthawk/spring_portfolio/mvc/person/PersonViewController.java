@@ -1,7 +1,6 @@
 package com.nighthawk.spring_portfolio.mvc.person;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -70,7 +69,6 @@ public class PersonViewController {
         return "redirect:/mvc/person/read";
     }
 
-    @Secured("ROLE_ADMIN")
     @GetMapping("/delete/{id}")
     public String personDelete(@PathVariable("id") long id) {
         repository.delete(id);
