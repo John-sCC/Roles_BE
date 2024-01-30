@@ -99,6 +99,7 @@ public class SecurityConfig {
 				// make sure we use stateless session; 
 				// session won't be used to store user's state.
 				.exceptionHandling(exceptions -> exceptions
+					.accessDeniedHandler(new CustomAccessDeniedHandler())
 					.authenticationEntryPoint(jwtAuthenticationEntryPoint)
 				)
 				.sessionManagement(session -> session
